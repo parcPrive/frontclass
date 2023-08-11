@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"
+    />
+  </head>
+  <body>
+    <input
+      type="text"
+      placeholder="검색할 이미지를 입력하세요."
+      class="imageSearchBar"
+    />
+    <button class="btnSearch">찾기</button>
+    <ul class="thumbList"></ul>
+    <script>
+      const thumbList = document.querySelector(".thumbList");
+      const imageSearchBar = document.querySelector(".imageSearchBar");
+      const btnSearch = document.querySelector(".btnSearch");
+      btnSearch.addEventListener("click", () => {
+        kakaoSearch(imageSearchBar.value);
+      });
+      imageSearchBar.addEventListener("keyup", (e) => {
+        console.log(e);
+        if (e.key === "Enter") {
+          kakaoSearch(imageSearchBar.value);
+        }
+      });
+
+      function kakaoSearch(search) {
+        thumbList.innerHTML = "";
+        fetch(`https://dapi.kakao.com/v2/search/vclip?query=${search}`, {
+          headers: {
+            Authorization: "KakaoAK c5d788c4659cd531402d65fec9bf7b5e",
+          },
+        })
+          .then((res) => {
+            return res.json();
+          })
+          .then((result) => {
+            console.log(result.documents);
+            const imageList = [...result.documents];
+            imageList.forEach((el) => {
+              thumbList.innerHTML += `<li><a href="${el.url}" data-fancybox="gallery"><img src="${el.thumbnail}" alt=""></a></li>`;
+            });
+          })
+          .catch((e) => {
+            alert("에러라고");
+            console.log("에러입니다.");
+          });
+        Fancybox.bind("[data-fancybox]", {
+          // Your custom options
+        });
+      }
+    </script>
+  </body>
+</html>

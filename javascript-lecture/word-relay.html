@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="/hagle.js"></script>
+  </head>
+  <body>
+    <!-- <ul>
+      <li class="prev-word">기러기</li>
+    </ul> -->
+    <div class="prev-word">선생님</div>
+    <input type="text" class="word" />
+  </body>
+  <script>
+    const word = document.querySelector(".word");
+    const prevWord = document.querySelector(".prev-word");
+
+    // console.log(txt.charAt(0)); // charAt(x) x에서 숫자가 들어가고 저기에 txt의 길이 안에 숫자를 넣으면 그 인덴스에 맞는 문자가 나온다.
+    // console.log(txt.charCodeAt(0)); // charCodeAt(x) x에 숫자가 들어가고 거기에 맞는 거의 아스키코드의 번호를 알려준다.
+    // console.log(txt.concat("이건 문자열")); // txt + 이건 문자열을 붙여서 출력해준다.
+    // console.log(txt.substring(0, 2));
+    // console.log(txt.split(""));
+    // const prevFirstWord =
+    const wordList = ["선생님"];
+    const animals = ["cat", "dog", "lion", "tiger"];
+    const test = "cat";
+    for (let i = 0; i < animals.length; i++) {
+      if (animals[i] === test) {
+        console.log(animals[i] === test);
+      }
+    }
+    animals.forEach((el, idx) => {
+      if (el === test) {
+        console.log(idx, "번째에", test);
+      }
+    });
+    console.log(animals.includes(test));
+    word.addEventListener("keydown", (el) => {
+      const inputWord = word.value;
+      const prevFirstWord = prevWord.textContent;
+      // console.log(HanTools.dueum(bbb.charAt(2)));
+      HanTools.dueum(prevFirstWord.charAt(2));
+
+      if (el.isComposing) return;
+      else {
+        if (el.key === "Enter") {
+          if (
+            inputWord.length !== 3 ||
+            inputWord.includes(" ") ||
+            wordList.includes(inputWord)
+          ) {
+            console.log("공백, 3글자, 중복 이 셋 중 하나다!!");
+          } else if (
+            prevFirstWord.charAt(prevFirstWord.length - 1) ===
+            inputWord.charAt(0)
+          ) {
+            fetch(
+              `https://opendict.korean.go.kr/api/search?key=51303C3171B77833ABC49C43424E357F&q=${inputWord}&req_type=json&pos=0`
+            )
+              .then((res) => {
+                return res.json();
+              })
+              .then((result) => {
+                const itemList = [...result.channel.item];
+                const dictionary = itemList.map((el) => {
+                  return el.word.replace(/\^|\-/g, "");
+                });
+                console.log(dictionary);
+                if (dictionary.includes(inputWord)) {
+                  console.log("다음");
+                  wordList.push(inputWord);
+                  prevWord.innerHTML = `${inputWord}`;
+                } else {
+                  console.log("떙");
+                }
+              });
+          }
+          word.value = "";
+          console.log(wordList);
+          // console.log(inputWord);
+        }
+      }
+    });
+
+    // async function isDict(search) {
+    //   const res = await fetch(
+    //     `https://opendict.korean.go.kr/api/search?key=51303C3171B77833ABC49C43424E357F&q=${search}&req_type=json`
+    //   );
+    //   const result = await res.json();
+    //   return result;
+    // }
+
+    // async function getisDict(word) {
+    //   const aaa = await isDict(word);
+    //   return aaa;
+    // }
+    // console.log(getisDict("소나기"));
+
+    const aaa = [];
+  </script>
+</html>

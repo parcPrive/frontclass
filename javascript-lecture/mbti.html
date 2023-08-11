@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="title" question-box></div>
+    <div class "btns">
+    <button class="btn01">첫번쨰 선탠</button>
+    <button class="btn02">두번쨰 선택</button>
+    </div>
+    <div class="result-box"></div>
+
+    <script>
+      // I(내향)E(외향)
+      // N(상상)S(현실)
+      // F(감정)T(이성)
+      // J(계획)P(무계획)
+
+      const btn01 = document.querySelector(".btn01")
+      const btn02 = document.querySelector(".btn02")
+      const title = document.querySelector(".title")
+      let count = 0
+      let question = []
+      let score = [
+      {id:"EI",num:5},
+      {id:"SN",num:5},
+      {id:"TF",num:5},
+      {id:"JP",num:5},
+      ]
+      fetch("mbti.json")
+        .then((res) => {
+          return res.json();
+        })
+        .then((result) => {
+          console.log(result.question);
+          question = [...result.question];
+          title.textContent = question[count].title;          
+          btn01.textContent = question[count].answera;
+          btn02.textContent = question[count].answerb;
+
+          btn01.addEventListener("click", (el)=>{
+            clickProcess(0)
+          })
+          btn02.addEventListener("click", (el)=>{
+            clickProcess(1)
+          })
+
+        });
+
+    
+        let  newScore;
+        function clickProcess(click){  
+          if(count < question.length){
+            console.log(count)
+            if(count !== 11){
+              title.textContent = question[count + 1].title;          
+              btn01.textContent = question[count + 1].answera;
+              btn02.textContent = question[count + 1].answerb;
+            }else{
+              title.textContent = question[count].title;          
+              btn01.textContent = question[count].answera;
+              btn02.textContent = question[count].answerb;
+            }
+            if(click === 0){
+            newScore = score.map((el) => {
+                if(el.id === question[count].type){
+                console.log(question[count].type,question[count].id)
+                return {id: el.id, num: el.num + 1}
+              }else{
+                return {id:el.id, num: el.num}
+              }
+            })
+          }
+          if(click === 1){
+            newScore =  score.map((el) => {
+                  if(el.id === question[count].type){
+                  console.log(question[count].type,question[count].id)
+                  return {id: el.id, num: el.num - 1}
+                }else{
+                  return {id:el.id, num: el.num}
+                }
+              })
+            }
+          }else{
+            console.log("여긴들어오긴 할까?")
+            const mbti = score.reduce((acc,current) => {
+              if(current.num > 5){
+                return acc + current.id.charAt(0)
+              }else{
+                return acc + current.id.charAt(1)
+              }
+            },"")
+            console.log(mbti)
+          }
+
+console.log(count)
+          // else{
+          //   score = score.map((el) => {
+          //       if(el.id === question[count].type){
+          //       console.log(question[count].type,question[count].id)
+          //       console.log({id: el.id, num : el.num})
+          //       return {id: el.id, num: el.num - 1}
+          //     }
+                          
+              
+          //   })
+          // }
+
+          score = newScore
+          // console.log(score)
+            
+            // console.log(newScore)
+            count++  
+            
+          }   
+        
+        // const testArr = [1, 2, 3, 4, 5]
+        // const total = testArr.reduce(function(acc,current){
+        //   console.log(acc,current)
+        //   return acc + current
+
+        // })
+        // console.log(total)
+
+
+  
+
+
+    </script>
+  </body>
+</html>

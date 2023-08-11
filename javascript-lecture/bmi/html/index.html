@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" class="height" placeholder="키를 입력하세요. Ex)180" />
+    <input
+      type="password"
+      class="weight"
+      placeholder="몸무게를 입력하세요. Ex)80"
+    />
+
+    <button class="btn">결과보기</button>
+
+    <div class="result"></div>
+    <script>
+      const btn = document.querySelector(".btn");
+      const height = document.querySelector(".height");
+      const weight = document.querySelector(".weight");
+      const result = document.querySelector(".result");
+      btn.addEventListener("click", () => {
+        const heightValue = parseInt(height.value);
+        const weightValue = parseInt(weight.value);
+
+        if (height.value === "") {
+          alert("키를 입력하세요.");
+          height.focus();
+          return;
+        }
+        if (weight.value === "") {
+          alert("키를 입력하세요.");
+          weight.focus();
+          return;
+        }
+        console.log(heightValue + heightValue);
+        let meterHeight = heightValue / 100;
+        let bmi = weightValue / Math.pow(meterHeight, 2);
+        console.log("bmi는", bmi);
+
+        if (bmi > 25) {
+          console.log("비만");
+          result.textContent = "비만";
+        } else if (bmi > 18.5) {
+          console.log("정상");
+          result.textContent = "정상";
+        } else {
+          console.log("저체중");
+          result.textContent = "저체중";
+        }
+      });
+
+      let num = 4;
+
+      if (num > 5) {
+        console.log("5보다 큽니다.");
+      } else {
+        console.log("5보다 작습니다.");
+      }
+
+      // 삼항연산자
+      let aa =
+        num > 5
+          ? "5보다 큽니다"
+          : num > 3
+          ? "5보다는 작지만 3보다는 크다."
+          : "3보다 작다";
+      console.log(aa);
+      let fruit = "apple";
+      switch (fruit) {
+        case "apple":
+          console.log("사과는 맛있어");
+          break;
+        case "banana":
+          console.log("바나나는 길어");
+          break;
+        case "cherry":
+          console.log("체리는 씨가 너무크다.");
+          break;
+        default:
+          console.log("니가 먹고싶은게 먼데?");
+          break;
+      }
+      const num01 = 10;
+      switch (num01) {
+        case 10:
+          console.log("num01은 5보다 큽니다.");
+      }
+
+      // const hang = document.querySelector(".num");
+      // const hangValue = parseInt(hang.value);
+      const hang = prompt("숫자를 입력!");
+
+      switch (parseInt(hang)) {
+        case 1:
+          console.log("수성");
+          break;
+        case 2:
+          console.log("금성");
+          break;
+        case 3:
+          console.log("지구");
+          break;
+        case 4:
+          console.log("화성");
+          break;
+        case 5:
+          console.log("목성");
+          break;
+        case 6:
+          console.log("토성");
+          break;
+        case 7:
+          console.log("천왕성");
+          break;
+        default:
+          console.log("행성!!");
+          break;
+      }
+    </script>
+  </body>
+</html>

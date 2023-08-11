@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <table border="1" width="1000px">
+      <tbody>
+        <!-- <tr>
+          <td>2 x 1 = 2</td>
+          <td>3 x 1 = 3</td>
+          <td>4 x 1 = 4</td>
+          <td>5 x 1 = 5</td>
+        </tr>
+
+        <tr>
+          <td>2 x 2 = 4</td>
+          <td>3 x 2 = 6</td>
+          <td>4 x 2 = 8</td>
+          <td>5 x 2 = 10</td> -->
+        </tr>
+        <tr></tr>
+      </tbody>
+    </table>
+    <script>
+      // const tr = document.querySelector("table tbody tr");
+      const tbody = document.querySelector("table tbody")
+      // tbody.innerHTML
+      for (let i = 0; i < 10; i++) {
+        tbody.innerHTML += `<tr></tr>`
+        const tr = tbody.querySelector(`tr:nth-child(${i +1})`) //`tr:nth-child(${i})`
+        for (let j = 2; j < 10; j++) {
+          if(i === 0){
+            tr.innerHTML += `<td>${j}단</td>`
+          }else{
+            tr.innerHTML += `<td>${j} x ${i} = ${j * i}</td>`;
+          }
+          
+        }
+        // console.log(i)
+        // document.createElement( "br" )
+      }
+    </script>
+  </body>
+</html>

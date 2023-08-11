@@ -1,0 +1,39 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+.lotto {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  li {
+    width: 50px;
+    height: 50px;
+    background-color: #000;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+    &.yellow {
+      background-color: #deb70c;
+    }
+    &.blue {
+      background-color: #2a0fb1;
+    }
+    &.red {
+      background-color: #f00;
+    }
+    &.gray {
+      background-color: #a3a3a3;
+    }
+    &.green {
+      background-color: #0a9466;
+    }
+  }
+}

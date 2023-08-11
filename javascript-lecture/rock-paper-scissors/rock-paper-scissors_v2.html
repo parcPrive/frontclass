@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/layout.css" />
+  </head>
+  <body>
+    <ul class="computer">
+      <li><img src="../rock-paper-scissors/images/scissors.svg" alt="" /></li>
+      <li><img src="../rock-paper-scissors/images/rock.svg" alt="" /></li>
+      <li><img src="../rock-paper-scissors/images/paper.svg" alt="" /></li>
+    </ul>
+
+    <ul class="human">
+      <li><img src="../rock-paper-scissors/images/scissors.svg" alt="" /></li>
+      <li><img src="../rock-paper-scissors/images/rock.svg" alt="" /></li>
+      <li><img src="../rock-paper-scissors/images/paper.svg" alt="" /></li>
+    </ul>
+    <div class="result"></div>
+    <script>
+      const computerList = document.querySelectorAll(".computer li");
+      const humanList = document.querySelectorAll(".human li");
+      const result = document.querySelector(".result");
+      document.createElement("ul");
+      result.appendChild(document.createElement("ul"));
+      const ul = result.querySelector("ul");
+
+      let random;
+
+      function randomChoice(min, max) {
+        //
+        const random = Math.floor(Math.random() * max + min);
+
+        return random;
+      }
+      function appendItem(className, txt) {
+        const li = document.createElement("li");
+        li.classList.add(className);
+        li.textContent = txt;
+        ul.appendChild(li);
+      }
+
+      function computerRandomChoice() {
+        computerList[0].style.display = "none";
+        computerList[1].style.display = "none";
+        computerList[2].style.display = "none";
+        random = randomChoice(0, 3);
+        computerList[random].style.display = "block";
+      }
+      let idx = setInterval(computerRandomChoice, 30);
+
+      // Math.ceil() 올림
+      // Math.floor() 내림
+      // Math.round() 반올림
+      let arr = ["가위", "바위", "보"];
+      let count = 0;
+      let winCount = 0;
+      let loseCount = 0;
+      let gameCount = 0;
+      for (let i = 0; i < humanList.length; i++) {
+        humanList[i].addEventListener("click", () => {
+          let ran = random;
+          clearInterval(idx);
+          gameCount++;
+
+          console.log("🍉🍉🍉🍉🍉");
+
+          if (i === 0) {
+            if (i === ran)
+              appendItem("Draw", "D"); // result.textContent = "draw";
+            else if (ran === 1) {
+              loseCount++;
+              appendItem("Lose", "L");
+              // result.textContent = "lose";
+            } else {
+              winCount++;
+              appendItem("Win", "W");
+              // result.textContent = "win";
+            }
+          }
+          if (i === 1) {
+            if (i === ran)
+              appendItem("Draw", "D"); // result.textContent = "draw";
+            else if (ran === 0) {
+              winCount++;
+              appendItem("Win", "W");
+              // result.textContent = "win";
+            } else {
+              loseCount++;
+              appendItem("Lose", "L");
+              // result.textContent = "lose";
+            }
+          }
+          if (i === 2) {
+            if (i === ran)
+              appendItem("Draw", "D"); // result.textContent = "draw";
+            else if (ran === 0) {
+              loseCount++;
+              appendItem("Lose", "L");
+              // result.textContent = "lose";
+            } else {
+              winCount++;
+              appendItem("Win", "W");
+              // result.textContent = "win";
+            }
+          }
+
+          console.log(arr[i], arr[ran]);
+          console.log("게임카운트", gameCount);
+          const stop = setTimeout(() => {
+            idx = setInterval(computerRandomChoice, 30);
+          }, 1000);
+          // if (winCount === 5) {
+          //   return location.reload();
+          // }
+          if (gameCount === 3) {
+            let aaa = clearTimeout(stop);
+            console.log(aaa);
+          }
+          console.log("🥭🥭🥭🥭");
+          console.log(winCount, loseCount);
+          result.textContent = "win: " + winCount + " lose: " + loseCount;
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <ul class="computer">
+      <li><img src="../rock-paper-scissors/images/scissors.svg" alt="" /></li>
+      <li><img src="../rock-paper-scissors/images/rock.svg" alt="" /></li>
+      <li><img src="../rock-paper-scissors/images/paper.svg" alt="" /></li>
+    </ul>
+
+    <ul class="human">
+      <li><img src="../rock-paper-scissors/images/scissors.svg" alt="" /></li>
+      <li><img src="../rock-paper-scissors/images/rock.svg" alt="" /></li>
+      <li><img src="../rock-paper-scissors/images/paper.svg" alt="" /></li>
+    </ul>
+    <div class="result"></div>
+    <script>
+      const computerList = document.querySelectorAll(".computer li");
+      const humanList = document.querySelectorAll(".human li");
+      const result = document.querySelector(".result");
+      // console.log(computerList[0]);
+      computerList[0].style.display = "none";
+      computerList[1].style.display = "none";
+      computerList[2].style.display = "none";
+      // computerList[0].style.display = "block";
+      // Math.ceil() 올림
+      // Math.floor() 내림
+      // Math.round() 반올림
+      let arr = ["가위", "바위", "보"];
+      for (let i = 0; i < humanList.length; i++) {
+        humanList[i].addEventListener("click", () => {
+          let ran = Math.floor(Math.random() * 3);
+          computerList[ran].style.display = "block";
+          if (i === 0) {
+            if (i === ran) result.textContent = "draw";
+            else if (ran === 1) result.textContent = "lose";
+            else {
+              result.textContent = "win";
+            }
+          }
+          if (i === 1) {
+            if (i === ran) result.textContent = "draw";
+            else if (ran === 0) result.textContent = "win";
+            else {
+              result.textContent = "lose";
+            }
+          }
+          if (i === 2) {
+            if (i === ran) result.textContent = "draw";
+            else if (ran === 0) result.textContent = "lose";
+            else {
+              result.textContent = "win";
+            }
+          }
+
+          console.log(arr[i], arr[ran]);
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LOTTO</title>
+    <link rel="stylesheet" href="../css/layout.css" />
+  </head>
+  <body>
+    <div class="paper"></div>
+    <!-- <ul class="lotto"> -->
+    <!-- <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li> -->
+    <!-- </ul> -->
+    <script>
+      // 1. 찢어 내기 slice
+      // const animals = ["cat", "puppy", "lion", "pig"];
+      // const animal = animals.splice(1, 1);
+      // console.log(animal[0]);
+
+      // let nums = [];
+      // for (let i = 1; i < 46; i++) {
+      //   nums.push(i);
+      // }
+      // console.log(nums);
+
+      let lotto = [];
+      let num;
+      const colors = ["yellow", "blue", "red", "gray", "green"];
+      const paper = document.querySelector(".paper");
+      const aaa = prompt("로또 몇개 구매하실껀가염??");
+
+      for (let i = 0; i < aaa; i++) {
+        paper.innerHTML += `<ul class="lotto"></ul>`;
+        const nums = Array(45)
+          .fill(0)
+          .map(function (el, idx) {
+            return idx + 1;
+          });
+        lotto = [];
+        const lottoF = document.querySelector(`.lotto:nth-child(${i + 1})`);
+        for (let j = 0; j < 6; j++) {
+          num = nums.splice(Math.floor(Math.random() * nums.length), 1);
+          lotto.push(num);
+        }
+        lotto.sort((a, b) => {
+          return a - b;
+        });
+        lotto.forEach(function (el) {
+          const color = colors[Math.ceil(el / 10) - 1];
+          lottoF.innerHTML += `<li class=${color}>${el}</li>`;
+        });
+      }
+    </script>
+  </body>
+</html>

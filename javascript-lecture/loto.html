@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let result = [];
+      // while (result.length < 7) {
+      //   let ran = Math.floor(Math.random() * 45 + 1);
+      //   if (result.includes(ran)) {
+      //     continue;
+      //   } else {
+      //     result.push(ran);
+      //   }
+      //   if (result.length === 6) {
+      //     break;
+      //   }
+      // }
+      // for (let i = 0; i < 6; i++) {
+      //   let ran = Math.floor(Math.random() * 45 + 1);
+      //   if (result.includes(ran)) {
+      //     i = i - 1;
+      //   } else {
+      //     result.push(ran);
+      //   }
+      // }
+      // console.log(result);
+      // let a = 10;
+      // let b = 20;
+      // let c = 0;
+      // c = a;
+      // a = b;
+      // b = c;
+      // console.log(a, b);
+      //=============================================================
+      // let loto = [];
+      // for (let i = 1; i <= 45; i++) {
+      //   loto.push(i);
+      // }
+      // console.log(loto);
+      // let aa;
+
+      // for (let i = 0; i < 50; i++) {
+      //   for (let j = 0; j < 6; j++) {
+      //     let ran = Math.floor(Math.random() * 45);
+      //     aa = loto[j];
+      //     loto[j] = loto[ran];
+      //     loto[ran] = aa;
+      //   }
+      // }
+      // for (let i = 0; i < 6; i++) {
+      //   console.log(loto[i]);
+      // }
+
+      //=============================================================
+      const fruits = ["apple", "tomato", "cherry", "plum"];
+      let temp = "";
+      for (let i = 0; i < fruits.length; i++) {
+        let ran = Math.floor(Math.random() * fruits.length);
+        temp = fruits[i];
+        fruits[i] = fruits[ran];
+        fruits[ran] = temp;
+      }
+      console.log(fruits);
+    </script>
+  </body>
+</html>

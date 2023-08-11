@@ -1,0 +1,48 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+li {
+  list-style: none;
+}
+.computer {
+  display: flex;
+  justify-content: center;
+  margin: 100px 0;
+}
+.human {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  &.prevent {
+    pointer-events: none;
+  }
+  img {
+    width: 100px;
+  }
+}
+.result {
+  display: flex;
+  justify-content: center;
+  font-size: 24px;
+  ul {
+    display: flex;
+    li {
+      width: 30px;
+      height: 30px;
+      display: flex;
+      justify-content: center;
+      color: #fff;
+      align-items: center;
+      &.win {
+        background-color: rgb(1, 135, 208);
+      }
+      &.draw {
+        background-color: rgb(211, 211, 211);
+      }
+      &.lose {
+        background-color: rgb(253, 26, 26);
+      }
+    }
+  }
+}
